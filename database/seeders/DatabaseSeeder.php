@@ -20,31 +20,37 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Seed default Admin
-        User::create([
-            'name' => 'Zain Admin',
-            'email' => 'zain_admin@gmail.com',
-            'password' => \Illuminate\Support\Facades\Hash::make('password123'),
-            'role' => 'admin',
-            'email_verified_at' => now(),
-        ]);
+        User::firstOrCreate(
+            ['email' => 'zain_admin@gmail.com'],
+            [
+                'name' => 'Zain Admin',
+                'password' => \Illuminate\Support\Facades\Hash::make('password123'),
+                'role' => 'admin',
+                'email_verified_at' => now(),
+            ]
+        );
 
         // Seed default Seller
-        User::create([
-            'name' => 'Zain Seller',
-            'email' => 'zain_seller@gmail.com',
-            'password' => \Illuminate\Support\Facades\Hash::make('password123'),
-            'role' => 'seller',
-            'email_verified_at' => now(),
-        ]);
+        User::firstOrCreate(
+            ['email' => 'zain_seller@gmail.com'],
+            [
+                'name' => 'Zain Seller',
+                'password' => \Illuminate\Support\Facades\Hash::make('password123'),
+                'role' => 'seller',
+                'email_verified_at' => now(),
+            ]
+        );
 
         // Seed default Buyer
-        User::create([
-            'name' => 'Zain Buyer',
-            'email' => 'zain_buyer@gmail.com',
-            'password' => \Illuminate\Support\Facades\Hash::make('password123'),
-            'role' => 'buyer',
-            'email_verified_at' => now(),
-        ]);
+        User::firstOrCreate(
+            ['email' => 'zain_buyer@gmail.com'],
+            [
+                'name' => 'Zain Buyer',
+                'password' => \Illuminate\Support\Facades\Hash::make('password123'),
+                'role' => 'buyer',
+                'email_verified_at' => now(),
+            ]
+        );
     }
 
 }

@@ -20,13 +20,16 @@ class CategorySeeder extends Seeder
         ];
 
         foreach ($categories as $category) {
-            DB::table('categories')->insert([
-                'name' => $category,
-                'slug' => Str::slug($category),
-                'description' => 'Beautiful wooden ' . strtolower($category) . ' for your home.',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            $slug = Str::slug($category);
+            if (!DB::table('categories')->where('slug', $slug)->exists()) {
+                DB::table('categories')->insert([
+                    'name' => $category,
+                    'slug' => $slug,
+                    'description' => 'Beautiful wooden ' . strtolower($category) . ' for your home.',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
         }
     }
 }
