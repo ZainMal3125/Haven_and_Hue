@@ -68,3 +68,15 @@ Route::get('/setup-db', function () {
         return 'Error: ' . $e->getMessage();
     }
 });
+
+// Temporary Route to Debug Database Configuration
+Route::get('/debug-db', function () {
+    return [
+        'connection' => config('database.default'),
+        'host' => config('database.connections.mysql.host'),
+        'port' => config('database.connections.mysql.port'),
+        'database' => config('database.connections.mysql.database'),
+        'username' => config('database.connections.mysql.username'),
+        'password' => config('database.connections.mysql.password') ? 'SET' : 'NOT_SET',
+    ];
+});
