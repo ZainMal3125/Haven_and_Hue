@@ -80,3 +80,13 @@ Route::get('/debug-db', function () {
         'password' => config('database.connections.mysql.password') ? 'SET' : 'NOT_SET',
     ];
 });
+
+// Temporary Route to Link Storage
+Route::get('/link-storage', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('storage:link');
+        return '<pre>' . \Illuminate\Support\Facades\Artisan::output() . '</pre>';
+    } catch (\Exception $e) {
+        return 'Error: ' . $e->getMessage();
+    }
+});
