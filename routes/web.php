@@ -55,3 +55,16 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->as('admin.')->group(
     Route::post('/categories', [DashboardController::class, 'storeCategory'])->name('categories.store');
     Route::delete('/categories/{category}', [DashboardController::class, 'deleteCategory'])->name('categories.destroy');
 });
+
+// Temporary Route to Setup/Migrate Database on Railway
+Route::get('/setup-db', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('migrate:fresh', [
+            '--seed' => true,
+            '--force' => true,
+        ]);
+        return '<pre>' . \Illuminate\Support\Facades\Artisan::output() . '</pre>';
+    } catch (\Exception $e) {
+        return 'Error: ' . $e->getMessage();
+    }
+});
